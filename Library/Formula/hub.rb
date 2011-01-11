@@ -1,12 +1,11 @@
 require 'formula'
 
 class Hub <Formula
-  url 'http://github.com/defunkt/hub/raw/gh-pages/standalone'
-  homepage 'http://github.com/defunkt/hub'
-  version '1.1.0'
-  md5 '4f5e4dec0663fb33aa3e8e46edbfce5a'
+  url 'https://github.com/defunkt/hub/tarball/v1.5.0'
+  homepage 'https://github.com/defunkt/hub'
+  md5 '3e719ea33cd2b78795dbfc6f8c5e41f8'
 
   def install
-    bin.install 'standalone' => 'hub'
+    system "rake", "install", "prefix=#{prefix}"
   end
 end

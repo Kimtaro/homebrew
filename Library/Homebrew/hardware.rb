@@ -27,6 +27,8 @@ class Hardware
       :penryn
     when 0x6b5a4cd2 # Nehalem
       :nehalem
+    when 0x573B5EEC # Arrandale
+      :arrandale
     else
       :dunno
     end
@@ -66,4 +68,8 @@ protected
     end
     $?.success? && result == 1 # sysctl call succeded and printed 1
   end
+end
+
+def snow_leopard_64?
+  MACOS_VERSION >= 10.6 and Hardware.is_64_bit?
 end

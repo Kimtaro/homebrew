@@ -1,9 +1,9 @@
 require 'formula'
 
 class Maatkit <Formula
-  url 'http://maatkit.googlecode.com/files/maatkit-5899.tar.gz'
+  url 'http://maatkit.googlecode.com/files/maatkit-6960.tar.gz'
   homepage 'http://code.google.com/p/maatkit/'
-  md5 'eb934c6bcf8604a1fd6c65a625fa8740'
+  sha1 'ad8dd1d9e476f79e7e91f98919a2ae7c5b8a2c20'
 
   depends_on 'DBD::mysql' => :perl
 
