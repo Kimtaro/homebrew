@@ -1,9 +1,10 @@
 require 'formula'
 
-class Parallel <Formula
-  url 'http://ftp.gnu.org/gnu/parallel/parallel-20101222.tar.bz2'
+class Parallel < Formula
   homepage 'http://savannah.gnu.org/projects/parallel/'
-  md5 '7d531b835fa7ba2975a3d3cdf13aae4c'
+  url 'http://ftpmirror.gnu.org/parallel/parallel-20120622.tar.bz2'
+  mirror 'http://ftp.gnu.org/gnu/parallel/parallel-20120622.tar.bz2'
+  sha1 'b184a55674ce10e8bf7c65790c2806552eb79577'
 
   def install
     system "./configure", "--prefix=#{prefix}"

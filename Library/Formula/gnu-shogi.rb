@@ -1,9 +1,11 @@
 require 'formula'
 
-class GnuShogi <Formula
+class GnuShogi < Formula
   url 'http://www.cs.caltech.edu/~mvanier/hacking/gnushogi/gnushogi-1.3.2.tar.gz'
   homepage 'http://www.cs.caltech.edu/~mvanier/hacking/gnushogi/gnushogi.html'
   md5 'a18eae93afc89bfd368ed5f6768be791'
+
+  depends_on :x11
 
   def patches
       # gcc 4.2.1 flags the following error
@@ -21,8 +23,8 @@ class GnuShogi <Formula
   def install
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
-                          "--x-include=/usr/X11/include",
-                          "--x-lib=/usr/X11/lib"
+                          "--x-include=#{MacOS::XQuartz.include}",
+                          "--x-lib=#{MacOS::XQuartz.lib}"
     system "make"
     system "make", "install", "MANDIR=#{man6}", "INFODIR=#{info}"
   end

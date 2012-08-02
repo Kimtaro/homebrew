@@ -4,8 +4,8 @@ def use_python?
   ARGV.include? '--enable-python-bindings'
 end
 
-class Libemu <Formula
-  head 'http://git.carnivore.it/libemu.git', :using => :git
+class Libemu < Formula
+  head 'http://git.carnivore.it/libemu.git'
   homepage 'http://libemu.carnivore.it/'
 
   depends_on 'pkg-config' => :build
@@ -13,6 +13,9 @@ class Libemu <Formula
   def options
     [["--enable-python-bindings", "Compile bindings for Python"]]
   end
+
+  depends_on :automake
+  depends_on :libtool
 
   def install
     inreplace 'Makefile.am' do |s|

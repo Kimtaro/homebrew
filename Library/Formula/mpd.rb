@@ -1,9 +1,11 @@
 require 'formula'
 
-class Mpd <Formula
-  url 'http://downloads.sourceforge.net/project/musicpd/mpd/0.16/mpd-0.16.tar.bz2'
+class Mpd < Formula
   homepage 'http://mpd.wikia.com'
-  md5 '3fc8ccc4488cbaadc1a10f415eada35f'
+  url 'http://sourceforge.net/projects/musicpd/files/mpd/0.17/mpd-0.17.tar.bz2'
+  sha1 '36201f32ca5729b62b0e6cbddb19ade20ee3f7d7'
+
+  head "git://git.musicpd.org/master/mpd.git"
 
   depends_on 'pkg-config' => :build
   depends_on 'glib'
@@ -23,6 +25,8 @@ class Mpd <Formula
   end
 
   def install
+    system "./autogen.sh" if ARGV.build_head?
+
     # make faad.h findable (when brew is used elsewhere than /usr/local/)
     ENV.append 'CFLAGS', "-I#{HOMEBREW_PREFIX}/include"
 
@@ -34,7 +38,7 @@ class Mpd <Formula
             "--enable-fluidsynth",
             "--enable-zip",
             "--enable-lame-encoder"]
-    args << "--disable-curl" if MACOS_VERSION <= 10.5
+    args << "--disable-curl" if MacOS.leopard?
     args << "--enable-lastfm" if ARGV.include?("--lastfm")
 
     system "./configure", *args

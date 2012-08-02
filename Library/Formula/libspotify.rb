@@ -1,22 +1,23 @@
 require 'formula'
 
-class Libspotify <Formula
-  url 'http://developer.spotify.com/download/libspotify/libspotify-0.0.6-Darwin.zip'
-  version '0.0.6'
+class Libspotify < Formula
   homepage 'http://developer.spotify.com/en/libspotify/overview/'
-  md5 'c4bbddf8a4e5e2ba3127728212228622'
+  url 'https://developer.spotify.com/download/libspotify/libspotify-12.1.51-Darwin-universal.zip'
+  md5 '41d019fd85c83ca4c28b823f825a9311'
 
   def install
-    prefix.install 'share'
-    (include+'libspotify').install "libspotify.framework/Versions/#{version}/Headers/api.h"
-    lib.install "libspotify.framework/Versions/#{version}/libspotify" => 'libspotify.0.0.6.dylib'
-    doc.install Dir['doc/*']
+    (include+'libspotify').install "libspotify.framework/Versions/12.1.51/Headers/api.h"
+    lib.install "libspotify.framework/Versions/12.1.51/libspotify" => "libspotify.12.1.51.dylib"
+    doc.install Dir['docs/*']
+    doc.install %w(ChangeLog README LICENSE licenses.xhtml examples)
+    man3.install Dir['man3/*']
 
     cd lib
-    ln_s "libspotify.0.0.6.dylib", "libspotify.dylib"
+    ln_s "libspotify.12.1.51.dylib", "libspotify.dylib"
+    ln_s "libspotify.12.1.51.dylib", "libspotify.12.dylib"
 
     system "install_name_tool", "-id",
-           "#{HOMEBREW_PREFIX}/lib/libspotify.#{version}.dylib",
+           "#{HOMEBREW_PREFIX}/lib/libspotify.12.1.51.dylib",
            "libspotify.dylib"
 
     (lib+'pkgconfig/libspotify.pc').write pc_content
